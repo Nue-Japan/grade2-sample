@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高校化学基礎 学習アプリ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .nav-link.active {
+            background-color: #3b82f6; /* bg-blue-600 */
+            color: white;
+        }
+        .electron-shell {
+            stroke: #9ca3af; /* gray-400 */
+            stroke-width: 1.5;
+            fill: none;
+        }
+        .electron {
+            fill: #3b82f6; /* blue-600 */
+        }
+        .nucleus {
+            fill: #ef4444; /* red-500 */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <!-- Sidebar Navigation -->
+        <nav id="sidebar" class="w-full md:w-64 bg-gray-800 text-white p-4 md:p-6 space-y-2 flex-shrink-0">
+            <h1 class="text-2xl font-bold mb-6 border-b border-gray-600 pb-4">化学基礎講座</h1>
+            <a href="#electron-configuration" class="nav-link block w-full text-left px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors duration-200">1. 原子と電子配置</a>
+            <a href="#ion-formation" class="nav-link block w-full text-left px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors duration-200">2. イオンの形成</a>
+            <a href="#ionization-energy" class="nav-link block w-full text-left px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors duration-200">3. イオン化エネルギー</a>
+            <a href="#ionic-bond" class="nav-link block w-full text-left px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors duration-200">4. イオン結合と結晶</a>
+            <a href="#covalent-bond" class="nav-link block w-full text-left px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors duration-200">5. 分子と共有結合</a>
+            <a href="#quiz" class="nav-link block w-full text-left px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors duration-200">6. 総合模擬問題</a>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 md:p-10 overflow-y-auto">
+
+            <!-- 1. Atomic Electron Configuration -->
+            <section id="electron-configuration" class="content-section space-y-8">
+                <h2 class="text-3xl font-bold border-b-4 border-blue-500 pb-2">1. 原子と電子配置</h2>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <p class="mb-4">原子は、中心にある原子核と、その周りを運動する電子からできています。電子は電子殻（K殻, L殻, M殻, N殻...）と呼ばれる層に分かれて存在します。原子番号1〜20の原子について、電子配置を確認してみましょう。</p>
+                    <div class="mb-4">
+                        <label for="atom-select" class="font-semibold">原子を選択してください:</label>
+                        <select id="atom-select" class="mt-1 block w-full md:w-1/2 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></select>
+                    </div>
+                    <div class="flex flex-col items-center justify-center p-4 min-h-[400px]">
+                        <svg id="electron-diagram" width="350" height="350" viewBox="0 0 350 350"></svg>
+                        <div id="atom-info" class="text-center mt-4 font-semibold text-lg"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Ion Formation -->
+            <section id="ion-formation" class="content-section space-y-8">
+                <h2 class="text-3xl font-bold border-b-4 border-blue-500 pb-2">2. イオンの形成</h2>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4">イオンとは？</h3>
+                    <p>原子が電子を失ったり（陽イオン）、受け取ったり（陰イオン）して、電気を帯びた粒子のことです。希ガス（He, Ne, Arなど）と同じ安定した電子配置になるためにイオンが形成されます。</p>
+                    <ul class="list-disc list-inside mt-4 space-y-2 bg-blue-50 p-4 rounded-md">
+                        <li><strong>陽イオン (Cation)</strong>: 原子が電子を失って、プラス(+)の電気を帯びたもの。(例: Na → Na⁺ + e⁻)</li>
+                        <li><strong>陰イオン (Anion)</strong>: 原子が電子を受け取って、マイナス(-)の電気を帯びたもの。(例: Cl + e⁻ → Cl⁻)</li>
+                        <li><strong>価数 (Valence)</strong>: イオンが帯びている電気の数。(例: Na⁺は1価の陽イオン, O²⁻は2価の陰イオン)</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4">主要なイオン一覧</h3>
+                    <p class="mb-4">まずはこれらの基本的なイオンの名称と化学式を覚えましょう。</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-xl font-semibold mb-2 text-center text-blue-600">陽イオン</h4>
+                            <table class="w-full border-collapse">
+                                <thead><tr class="bg-blue-100"><th class="border p-2">名称</th><th class="border p-2">化学式</th></tr></thead>
+                                <tbody id="cation-table" class="text-center"></tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-2 text-center text-red-600">陰イオン</h4>
+                            <table class="w-full border-collapse">
+                                <thead><tr class="bg-red-100"><th class="border p-2">名称</th><th class="border p-2">化学式</th></tr></thead>
+                                <tbody id="anion-table" class="text-center"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Ionization Energy -->
+            <section id="ionization-energy" class="content-section space-y-8">
+                <h2 class="text-3xl font-bold border-b-4 border-blue-500 pb-2">3. イオン化エネルギーと関連用語</h2>
+                <div class="bg-white p-6 rounded-xl shadow-lg space-y-6">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-2">イオン化エネルギー (Ionization Energy)</h3>
+                        <p>原子から電子を1個取り去って、1価の陽イオンにするために必要なエネルギーのことです。この値が<span class="font-bold text-red-600">小さい</span>ほど、陽イオンになりやすいと言えます。</p>
+                        <p class="mt-2 text-sm text-gray-600">周期表の傾向: 右にいくほど、また上にいくほど大きくなる。</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-2">電子親和力 (Electron Affinity)</h3>
+                        <p>原子が電子を1個受け取って、1価の陰イオンになるときに放出するエネルギーのことです。この値が<span class="font-bold text-blue-600">大きい</span>ほど、陰イオンになりやすいと言えます。</p>
+                        <p class="mt-2 text-sm text-gray-600">周期表の傾向: 右にいくほど、また上にいくほど大きくなる（希ガスを除く）。</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-2">イオン半径 (Ionic Radius)</h3>
+                        <p>イオンの大きさを示す半径です。もとの原子と比較すると、以下のような特徴があります。</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li><strong>陽イオン</strong>: もとの原子より電子が減るため、原子核が電子を強く引きつけ、半径は<span class="font-bold">小さく</span>なる。</li>
+                            <li><strong>陰イオン</strong>: もとの原子より電子が増えるため、電子同士の反発が強まり、半径は<span class="font-bold">大きく</span>なる。</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Ionic Bond and Crystal -->
+            <section id="ionic-bond" class="content-section space-y-8">
+                <h2 class="text-3xl font-bold border-b-4 border-blue-500 pb-2">4. イオン結合とイオン結晶</h2>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4">イオン結合</h3>
+                    <p>陽イオンと陰イオンが、クーロン力（静電気的な引力）によって引きつけ合ってできる結合です。主に金属元素と非金属元素の間で形成されます。</p>
+                    <div class="my-4 p-4 bg-blue-50 rounded-md text-center">
+                        <p class="text-lg">例: ナトリウム (Na) と 塩素 (Cl)</p>
+                        <p>Na → Na⁺ + e⁻ (電子を失い陽イオンに)</p>
+                        <p>Cl + e⁻ → Cl⁻ (電子を受け取り陰イオンに)</p>
+                        <p class="font-bold mt-2">Na⁺ と Cl⁻ が引き合って結合 → NaCl (塩化ナトリウム)</p>
+                    </div>
+                    <h3 class="text-2xl font-semibold my-4">組成式とその名称</h3>
+                    <p>イオン結合でできた物質は、陽イオンと陰イオンの電荷が全体で0になるような比で組み合わさります。この比率で表した化学式を<span class="font-bold">組成式</span>といいます。名称は「<span class="font-bold text-red-600">陰イオン</span>＋<span class="font-bold text-blue-600">陽イオン</span>」の順で読みます。（例: 塩化物イオン＋ナトリウムイオン → 塩化ナトリウム）</p>
+                    <h4 class="text-xl font-semibold mt-6 mb-2">練習問題: 組成式と名称を考えよう</h4>
+                    <div class="grid grid-cols-2 gap-4">
+                         <div id="cation-select-div" class="flex flex-col"><label>陽イオン:</label><select id="cation-select" class="p-2 border rounded"></select></div>
+                         <div id="anion-select-div" class="flex flex-col"><label>陰イオン:</label><select id="anion-select" class="p-2 border rounded"></select></div>
+                    </div>
+                    <button id="check-formula-btn" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">答え合わせ</button>
+                    <div id="formula-result" class="mt-4 p-4 bg-gray-100 rounded-md h-24 font-mono text-lg"></div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                     <h3 class="text-2xl font-semibold mb-4">イオン結晶</h3>
+                     <p>多数の陽イオンと陰イオンがイオン結合によって規則正しく配列してできた結晶です。</p>
+                     <ul class="list-disc list-inside mt-4 space-y-2">
+                        <li>硬くてもろい。（力を加えるとイオンの層がずれ、同種のイオンが反発しあって割れる）</li>
+                        <li>融点が高いものが多い。</li>
+                        <li>固体状態では電気を通さないが、水に溶かしたり融解させたりすると電気を通す（電解質）。</li>
+                     </ul>
+                </div>
+            </section>
+            
+            <!-- 5. Covalent Bond -->
+            <section id="covalent-bond" class="content-section space-y-8">
+                <h2 class="text-3xl font-bold border-b-4 border-blue-500 pb-2">5. 分子と共有結合</h2>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4">共有結合</h3>
+                    <p>非金属元素の原子どうしが、互いに<span class="font-bold">価電子</span>（最外殻電子）を出し合って電子対をつくり、それを共有することでできる結合です。この結合によってできた粒子を<span class="font-bold">分子</span>と呼びます。</p>
+                    <div class="my-4 p-4 bg-green-50 rounded-md">
+                        <p class="text-lg font-semibold">例：水素分子 (H₂)</p>
+                        <p>水素原子(H)は価電子を1個持つ。2つの水素原子が互いの電子を1個ずつ出し合い、電子対を共有することで、それぞれがHeと同じ安定した電子配置になる。</p>
+                        <p class="font-mono text-xl text-center mt-2">H・ + ・H  →  H:H</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4">電子式と構造式</h3>
+                    <p>分子の形を表現する方法として、電子式と構造式があります。</p>
+                    <ul class="list-disc list-inside mt-4 space-y-2">
+                        <li><strong>電子式</strong>: 価電子を点(・)で表し、原子の周りに配置した式。共有されている電子対を<span class="font-bold">共有電子対</span>、共有されていない電子対を<span class="font-bold">非共有電子対</span>という。</li>
+                        <li><strong>構造式</strong>: 共有電子対を1本の線（価標）で表した式。</li>
+                    </ul>
+                    <h4 class="text-xl font-semibold mt-6 mb-2">分子式から電子式・構造式を見てみよう</h4>
+                    <div class="flex flex-col md:flex-row items-center gap-4">
+                        <select id="molecule-select" class="p-2 border rounded-md w-full md:w-auto">
+                            <option value="H2">水素 (H₂)</option>
+                            <option value="H2O">水 (H₂O)</option>
+                            <option value="NH3">アンモニア (NH₃)</option>
+                            <option value="CH4">メタン (CH₄)</option>
+                            <option value="CO2">二酸化炭素 (CO₂)</option>
+                            <option value="N2">窒素 (N₂)</option>
+                        </select>
+                    </div>
+                    <div id="molecule-display" class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 text-center">
+                        <div>
+                            <h5 class="font-semibold text-lg mb-2">電子式</h5>
+                            <div id="electron-formula" class="p-4 bg-gray-100 rounded min-h-[100px] flex items-center justify-center font-mono text-2xl"></div>
+                        </div>
+                        <div>
+                            <h5 class="font-semibold text-lg mb-2">構造式</h5>
+                            <div id="structural-formula" class="p-4 bg-gray-100 rounded min-h-[100px] flex items-center justify-center font-mono text-2xl"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Quiz -->
+            <section id="quiz" class="content-section space-y-8">
+                <h2 class="text-3xl font-bold border-b-4 border-blue-500 pb-2">6. 総合模擬問題</h2>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+                        <div>
+                            <h3 class="text-2xl font-semibold">実力試しクイズ</h3>
+                            <p class="mt-1 text-gray-600">各レベルの問題に挑戦して、理解度を確認しましょう。</p>
+                        </div>
+                        <button id="toggle-all-answers" class="bg-green-500 text-white px-5 py-2 rounded-lg hover:bg-green-600 transition-colors mt-3 sm:mt-0 flex-shrink-0">全ての答えを表示</button>
+                    </div>
+
+                    <!-- 下級問題 -->
+                    <div class="mb-10">
+                        <h4 class="text-xl font-bold mb-4 p-2 bg-blue-100 text-blue-800 rounded-md">レベル１：下級問題 (基礎用語の確認)</h4>
+                        <div id="easy-quiz-container" class="space-y-4">
+                            <!-- Easy quiz items will be injected here by JS -->
+                        </div>
+                    </div>
+                    
+                    <!-- 中級問題 -->
+                    <div class="mb-10">
+                        <h4 class="text-xl font-bold mb-4 p-2 bg-yellow-100 text-yellow-800 rounded-md">レベル２：中級問題 (基本知識の応用)</h4>
+                        <div id="medium-quiz-container" class="space-y-4">
+                            <!-- Medium quiz items will be injected here by JS -->
+                        </div>
+                    </div>
+
+                    <!-- 上級問題 -->
+                    <div>
+                        <h4 class="text-xl font-bold mb-4 p-2 bg-red-100 text-red-800 rounded-md">レベル３：上級問題 (総合的な理解)</h4>
+                        <div id="hard-quiz-container" class="space-y-4">
+                            <!-- Hard quiz items will be injected here by JS -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // --- Data ---
+            const atoms = [
+                { num: 1, symbol: 'H', name: '水素', config: [1] }, { num: 2, symbol: 'He', name: 'ヘリウム', config: [2] },
+                { num: 3, symbol: 'Li', name: 'リチウム', config: [2, 1] }, { num: 4, symbol: 'Be', name: 'ベリリウム', config: [2, 2] },
+                { num: 5, symbol: 'B', name: 'ホウ素', config: [2, 3] }, { num: 6, symbol: 'C', name: '炭素', config: [2, 4] },
+                { num: 7, symbol: 'N', name: '窒素', config: [2, 5] }, { num: 8, symbol: 'O', name: '酸素', config: [2, 6] },
+                { num: 9, symbol: 'F', name: 'フッ素', config: [2, 7] }, { num: 10, symbol: 'Ne', name: 'ネオン', config: [2, 8] },
+                { num: 11, symbol: 'Na', name: 'ナトリウム', config: [2, 8, 1] }, { num: 12, symbol: 'Mg', name: 'マグネシウム', config: [2, 8, 2] },
+                { num: 13, symbol: 'Al', name: 'アルミニウム', config: [2, 8, 3] }, { num: 14, symbol: 'Si', name: 'ケイ素', config: [2, 8, 4] },
+                { num: 15, symbol: 'P', name: 'リン', config: [2, 8, 5] }, { num: 16, symbol: 'S', name: '硫黄', config: [2, 8, 6] },
+                { num: 17, symbol: 'Cl', name: '塩素', config: [2, 8, 7] }, { num: 18, symbol: 'Ar', name: 'アルゴン', config: [2, 8, 8] },
+                { num: 19, symbol: 'K', name: 'カリウム', config: [2, 8, 8, 1] }, { num: 20, symbol: 'Ca', name: 'カルシウム', config: [2, 8, 8, 2] }
+            ];
+            const cations = [
+                { name: '水素イオン', formula: 'H⁺' }, { name: 'リチウムイオン', formula: 'Li⁺' }, { name: 'ナトリウムイオン', formula: 'Na⁺' },
+                { name: 'カリウムイオン', formula: 'K⁺' }, { name: 'マグネシウムイオン', formula: 'Mg²⁺' }, { name: 'カルシウムイオン', formula: 'Ca²⁺' },
+                { name: 'アルミニウムイオン', formula: 'Al³⁺' }, { name: 'アンモニウムイオン', formula: 'NH₄⁺' }
+            ];
+            const anions = [
+                { name: 'フッ化物イオン', formula: 'F⁻' }, { name: '塩化物イオン', formula: 'Cl⁻' }, { name: '臭化物イオン', formula: 'Br⁻' },
+                { name: 'ヨウ化物イオン', formula: 'I⁻' }, { name: '酸化物イオン', formula: 'O²⁻' }, { name: '硫化物イオン', formula: 'S²⁻' },
+                { name: '水酸化物イオン', formula: 'OH⁻' }, { name: '硝酸イオン', formula: 'NO₃⁻' }, { name: '炭酸イオン', formula: 'CO₃²⁻' },
+                { name: '硫酸イオン', formula: 'SO₄²⁻' }
+            ];
+            const molecules = {
+                'H2': { electron: 'H : H', structure: 'H - H' }, 'H2O': { electron: 'H : Ö : H', structure: 'H - O - H (折れ線形)' },
+                'NH3': { electron: 'H : N̈ : H<br>&nbsp;&nbsp;&nbsp;&nbsp;・・<br>&nbsp;&nbsp;&nbsp;&nbsp;H', structure: 'H - N - H<br>&nbsp;&nbsp;&nbsp;&nbsp;| <br>&nbsp;&nbsp;&nbsp;&nbsp;H (三角錐形)' },
+                'CH4': { electron: '&nbsp;&nbsp;&nbsp;&nbsp;H<br>&nbsp;&nbsp;&nbsp;&nbsp;・・<br>H : C : H<br>&nbsp;&nbsp;&nbsp;&nbsp;・・<br>&nbsp;&nbsp;&nbsp;&nbsp;H', structure: '&nbsp;&nbsp;&nbsp;&nbsp;H<br>&nbsp;&nbsp;&nbsp;&nbsp;|<br>H - C - H<br>&nbsp;&nbsp;&nbsp;&nbsp;|<br>&nbsp;&nbsp;&nbsp;&nbsp;H (正四面体形)' },
+                'CO2': { electron: 'Ö :: C :: Ö', structure: 'O = C = O (直線形)' }, 'N2': { electron: 'N ::: N', structure: 'N ≡ N' }
+            };
+            const easyQuizData = [
+                { q: "原子から電子を1個取り去り、1価の陽イオンにするのに必要なエネルギー。", a: "イオン化エネルギー", link: "#ionization-energy" },
+                { q: "原子が電子を受け取り、1価の陰イオンになるときに放出されるエネルギー。", a: "電子親和力", link: "#ionization-energy" },
+                { q: "陽イオンと陰イオンが静電気的な引力で結びつく化学結合。", a: "イオン結合", link: "#ionic-bond" },
+                { q: "非金属原子どうしが価電子を出し合って電子対を共有してできる結合。", a: "共有結合", link: "#covalent-bond" },
+                { q: "共有結合によってできた粒子。", a: "分子", link: "#covalent-bond" },
+                { q: "価電子を点で表し、原子記号の周りに配置した化学式。", a: "電子式", link: "#covalent-bond" },
+                { q: "共有電子対を1本の線（価標）で表した化学式。", a: "構造式", link: "#covalent-bond" },
+                { q: "イオンからなる物質で、水に溶けたり融解したりすると電気を通すもの。", a: "電解質", link: "#ionic-bond" },
+                { q: "原子の中心にあり、陽子と中性子からなる部分。", a: "原子核", link: "#electron-configuration" },
+                { q: "原子の最も外側の電子殻にある電子。", a: "価電子", link: "#covalent-bond" }
+            ];
+            const mediumQuizData = [
+                { q: "原子番号12のMg原子の電子配置をK殻, L殻, M殻の順に答えよ。", a: "K:2, L:8, M:2", link: "#electron-configuration" },
+                { q: "硫黄(S)が最も安定なイオンになったときのイオン式を答えよ。", a: "S<sup>2-</sup>", link: "#ion-formation" },
+                { q: "カルシウムイオン (Ca<sup>2+</sup>) と塩化物イオン (Cl<sup>-</sup>) からなる物質の組成式を答えよ。", a: "CaCl<sub>2</sub>", link: "#ionic-bond" },
+                { q: "アンモニア分子 (NH<sub>3</sub>) の非共有電子対は何対あるか。", a: "1対", link: "#covalent-bond" },
+                { q: "二酸化炭素分子 (CO<sub>2</sub>) に含まれる共有電子対の数は合計でいくつか。", a: "4対", link: "#covalent-bond" },
+                { q: "陽イオンの半径は、もとの原子の半径と比べて大きいか、小さいか。", a: "小さい", link: "#ionization-energy" },
+                { q: "イオン化エネルギーが最も小さい原子を次のうちから選べ: Li, Na, K", a: "K (カリウム)", link: "#ionization-energy" },
+                { q: "水分子(H<sub>2</sub>O)の分子の形を何というか。", a: "折れ線形", link: "#covalent-bond" },
+                { q: "メタン (CH<sub>4</sub>) は何という形の分子か。", a: "正四面体形", link: "#covalent-bond" },
+                { q: "原子番号17の塩素原子(Cl)の価電子の数はいくつか。", a: "7個", link: "#electron-configuration" }
+            ];
+            const hardQuizData = [
+                { q: "イオン化エネルギーと電子親和力の両方が大きい元素は、周期表のどの位置に多いか。", a: "右上 (ただし希ガスは除く)", link: "#ionization-energy" },
+                { q: "Na<sup>+</sup>, Mg<sup>2+</sup>, O<sup>2-</sup>, F<sup>-</sup> のうち、イオン半径が最も大きいものはどれか。", a: "O<sup>2-</sup>", link: "#ionization-energy" },
+                { q: "窒素分子 (N<sub>2</sub>) は、原子間で何重結合を形成しているか。", a: "三重結合", link: "#covalent-bond" },
+                { q: "塩化ナトリウム結晶では、1個のナトリウムイオンの周りに何個の塩化物イオンが配位しているか。", a: "6個", link: "#ionic-bond" },
+                { q: "ダイヤモンドのように、多数の原子が共有結合で結びついてできた結晶を何というか。", a: "共有結合の結晶", link: "#covalent-bond" },
+                { q: "電気陰性度とは何か、簡潔に説明せよ。", a: "共有電子対を原子が引きつける強さの尺度。", link: "#covalent-bond" },
+                { q: "無極性分子を次のうちから全て選べ: H<sub>2</sub>O, CO<sub>2</sub>, CH<sub>4</sub>, NH<sub>3</sub>", a: "CO<sub>2</sub>, CH<sub>4</sub>", link: "#covalent-bond" },
+                { q: "アルゴン(Ar)と同じ電子配置を持つイオンの化学式を2つ挙げよ。", a: "例: K<sup>+</sup>, Ca<sup>2+</sup>, Cl<sup>-</sup>, S<sup>2-</sup> など", link: "#ion-formation" },
+                { q: "イオン結合と共有結合の違いを、結合を形成する原子の種類の観点から説明せよ。", a: "イオン結合は主に金属元素と非金属元素の間で、共有結合は主に非金属元素どうしの間で形成される。", link: "#ionic-bond" },
+                { q: "組成式で表される物質と、分子式で表される物質の大きな違いは何か。", a: "組成式は構成イオンの比率を示すのに対し、分子式は1分子を構成する原子の数を示す。", link: "#ionic-bond" }
+            ];
+
+            // --- Navigation ---
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentSections = document.querySelectorAll('.content-section');
+            function updateContent(hash) {
+                hash = hash || window.location.hash || '#electron-configuration';
+                navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === hash));
+                contentSections.forEach(section => section.classList.toggle('active', `#${section.id}` === hash));
+            }
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => { e.preventDefault(); window.location.hash = link.getAttribute('href'); });
+            });
+            window.addEventListener('hashchange', () => updateContent(window.location.hash));
+
+            // --- Section 1: Electron Configuration ---
+            const atomSelect = document.getElementById('atom-select');
+            const diagram = document.getElementById('electron-diagram');
+            const atomInfo = document.getElementById('atom-info');
+            atoms.forEach(atom => {
+                const option = document.createElement('option');
+                option.value = atom.num;
+                option.textContent = `${atom.num}: ${atom.name} (${atom.symbol})`;
+                atomSelect.appendChild(option);
+            });
+            function drawElectronConfiguration(atom) {
+                diagram.innerHTML = '';
+                const cx = 175, cy = 175;
+                const shells = [ { radius: 40 }, { radius: 80 }, { radius: 120 }, { radius: 160 }];
+                for (let i = 0; i < atom.config.length; i++) {
+                    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                    circle.setAttribute("cx", cx); circle.setAttribute("cy", cy); circle.setAttribute("r", shells[i].radius); circle.setAttribute("class", "electron-shell");
+                    diagram.appendChild(circle);
+                }
+                const nucleus = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                nucleus.setAttribute("cx", cx); nucleus.setAttribute("cy", cy); nucleus.setAttribute("r", 20); nucleus.setAttribute("class", "nucleus");
+                diagram.appendChild(nucleus);
+                const nucleusText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                nucleusText.setAttribute("x", cx); nucleusText.setAttribute("y", cy + 5); nucleusText.setAttribute("text-anchor", "middle"); nucleusText.setAttribute("fill", "white"); nucleusText.setAttribute("font-size", "14"); nucleusText.textContent = `+${atom.num}`;
+                diagram.appendChild(nucleusText);
+                atom.config.forEach((electronCount, shellIndex) => {
+                    const radius = shells[shellIndex].radius;
+                    for (let i = 0; i < electronCount; i++) {
+                        const angle = (2 * Math.PI / electronCount) * i;
+                        const x = cx + radius * Math.cos(angle); const y = cy + radius * Math.sin(angle);
+                        const electron = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                        electron.setAttribute("cx", x); electron.setAttribute("cy", y); electron.setAttribute("r", 5); electron.setAttribute("class", "electron");
+                        diagram.appendChild(electron);
+                    }
+                });
+                let configStr = `K:${atom.config[0] || 0} L:${atom.config[1] || 0} M:${atom.config[2] || 0} N:${atom.config[3] || 0}`;
+                atomInfo.textContent = `${atom.name} (${atom.symbol}), 電子配置: ${configStr}`;
+            }
+            atomSelect.addEventListener('change', () => drawElectronConfiguration(atoms.find(a => a.num == atomSelect.value)));
+
+            // --- Section 2: Ion Tables ---
+            const cationTable = document.getElementById('cation-table');
+            const anionTable = document.getElementById('anion-table');
+            cations.forEach(ion => { cationTable.innerHTML += `<tr><td class="border p-2">${ion.name}</td><td class="border p-2 font-mono">${ion.formula.replace(/(\d+)/g, '<sup>$1</sup>')}</td></tr>`; });
+            anions.forEach(ion => { anionTable.innerHTML += `<tr><td class="border p-2">${ion.name}</td><td class="border p-2 font-mono">${ion.formula.replace(/(\d+)([+\-])/g, '<sup>$1$2</sup>')}</td></tr>`; });
+
+            // --- Section 4: Ionic Formula ---
+            const cationSelect = document.getElementById('cation-select');
+            const anionSelect = document.getElementById('anion-select');
+            const checkFormulaBtn = document.getElementById('check-formula-btn');
+            const formulaResult = document.getElementById('formula-result');
+            cations.forEach(ion => { const option = document.createElement('option'); option.value = ion.formula; option.textContent = ion.name; cationSelect.appendChild(option); });
+            anions.forEach(ion => { const option = document.createElement('option'); option.value = ion.formula; option.textContent = ion.name; anionSelect.appendChild(option); });
+            checkFormulaBtn.addEventListener('click', () => {
+                const cationName = cationSelect.options[cationSelect.selectedIndex].text;
+                const anionName = anionSelect.options[anionSelect.selectedIndex].text;
+                const getCharge = (f) => { const m = f.match(/(\d*)([+\-]?)/); let c = 1; if (m[1]) c = parseInt(m[1]); return m[2] === '-' ? -c : c; };
+                const getPart = (f) => f.replace(/[\d\+\-]+/g, '');
+                const cCharge = getCharge(cationSelect.value), aChargeAbs = Math.abs(getCharge(anionSelect.value));
+                const cPart = getPart(cationSelect.value), aPart = getPart(anionSelect.value);
+                const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
+                const lcm = (cCharge * aChargeAbs) / gcd(cCharge, aChargeAbs);
+                const cRatio = lcm / cCharge, aRatio = lcm / aChargeAbs;
+                const format = (p, r) => r > 1 ? `${(p.length > 1 ? `(${p})` : p)}${r}` : p;
+                const finalF = format(cPart, cRatio) + format(aPart, aRatio);
+                const finalN = anionName.replace(/イオン/g, '化物').replace(/物化物/g, '化物') + cationName.replace(/イオン/g, '');
+                formulaResult.innerHTML = `<p><strong>組成式:</strong> ${finalF}</p><p><strong>名称:</strong> ${finalN}</p>`;
+            });
+
+            // --- Section 5: Molecule Display ---
+            const moleculeSelect = document.getElementById('molecule-select');
+            const electronFormulaDiv = document.getElementById('electron-formula');
+            const structuralFormulaDiv = document.getElementById('structural-formula');
+            function updateMoleculeDisplay() {
+                const molecule = molecules[moleculeSelect.value];
+                electronFormulaDiv.innerHTML = molecule.electron.replace(/:/g, '<span class="text-blue-600 font-bold">&centerdot;&centerdot;</span>');
+                structuralFormulaDiv.innerHTML = molecule.structure;
+            }
+            moleculeSelect.addEventListener('change', updateMoleculeDisplay);
+            
+            // --- Section 6: Quiz ---
+            const quizSection = document.getElementById('quiz');
+            function createQuiz(level, data, container) {
+                container.innerHTML = '';
+                const offset = level === 'easy' ? 1 : (level === 'medium' ? 11 : 21);
+                data.forEach((item, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'quiz-item p-4 border rounded-lg bg-white';
+                    div.innerHTML = `
+                        <div class="flex justify-between items-start mb-3">
+                            <p class="pr-4"><strong>問題 ${index + offset}:</strong> ${item.q}</p>
+                            <a href="${item.link}" class="related-link flex-shrink-0 text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded hover:bg-gray-300 transition-colors">関連ページ</a>
+                        </div>
+                        <div class="flex items-center">
+                            <button class="toggle-answer-btn bg-blue-500 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-600 transition-colors">答えを見る</button>
+                            <div class="quiz-answer hidden ml-4 p-2 bg-green-100 text-green-800 rounded-md font-semibold">${item.a}</div>
+                        </div>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+            createQuiz('easy', easyQuizData, document.getElementById('easy-quiz-container'));
+            createQuiz('medium', mediumQuizData, document.getElementById('medium-quiz-container'));
+            createQuiz('hard', hardQuizData, document.getElementById('hard-quiz-container'));
+            quizSection.addEventListener('click', (e) => {
+                if (e.target.classList.contains('toggle-answer-btn')) {
+                    const button = e.target;
+                    const answerDiv = button.parentElement.querySelector('.quiz-answer');
+                    const isHidden = answerDiv.classList.toggle('hidden');
+                    button.textContent = isHidden ? '答えを見る' : '隠す';
+                }
+            });
+            let allAnswersVisible = false;
+            document.getElementById('toggle-all-answers').addEventListener('click', (e) => {
+                allAnswersVisible = !allAnswersVisible;
+                quizSection.querySelectorAll('.quiz-answer').forEach(div => div.classList.toggle('hidden', !allAnswersVisible));
+                quizSection.querySelectorAll('.toggle-answer-btn').forEach(btn => btn.textContent = allAnswersVisible ? '隠す' : '答えを見る');
+                e.target.textContent = allAnswersVisible ? '全ての答えを隠す' : '全ての答えを表示';
+            });
+
+            // --- Initial Load ---
+            updateContent();
+            drawElectronConfiguration(atoms[0]);
+            updateMoleculeDisplay();
+            checkFormulaBtn.click();
+        });
+    </script>
+</body>
+</html>
+
